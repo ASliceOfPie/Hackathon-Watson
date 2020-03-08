@@ -1,0 +1,718 @@
+{
+  "intents": [
+    {
+      "intent": "Doihave",
+      "examples": [
+        {
+          "text": "How to tell if infected?"
+        },
+        {
+          "text": "I have a cough do I have the Corona Virus?"
+        },
+        {
+          "text": "I have shortness of breath do I have Corona Virus?"
+        },
+        {
+          "text": "I think I have Corona Virus?"
+        },
+        {
+          "text": "I feel ill do I have Corona Virus?"
+        },
+        {
+          "text": "Am I infected?"
+        },
+        {
+          "text": "I think I have Coivd 19?"
+        },
+        {
+          "text": "Do I have Corona Virus?"
+        },
+        {
+          "text": "Do I have the Corona Virus?"
+        },
+        {
+          "text": "I have a fever am I infected?"
+        },
+        {
+          "text": "no"
+        }
+      ],
+      "description": ""
+    }
+  ],
+  "entities": [
+    {
+      "entity": "yes_no",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "yes",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "no",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "dialog_nodes": [
+    {
+      "type": "standard",
+      "title": "no",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": ""
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_10_1583600540315",
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "node_7_1583600491607"
+      },
+      "conditions": "@yes_no:no",
+      "dialog_node": "node_12_1583600540318",
+      "previous_sibling": "node_11_1583600540318"
+    },
+    {
+      "type": "standard",
+      "title": "yes",
+      "output": {
+        "generic": []
+      },
+      "parent": "node_10_1583600540315",
+      "context": {
+        "score": "<? $score + 1 ?>"
+      },
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "node_7_1583600491607"
+      },
+      "conditions": "@yes_no:yes",
+      "dialog_node": "node_11_1583600540318"
+    },
+    {
+      "type": "standard",
+      "title": "no",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": ""
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_1_1583597212583",
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "node_6_1583602590593"
+      },
+      "conditions": "@yes_no:no",
+      "dialog_node": "node_3_1583597212586",
+      "previous_sibling": "node_2_1583597212586"
+    },
+    {
+      "type": "standard",
+      "title": "yes",
+      "output": {
+        "generic": [
+          {
+            "values": [],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_1_1583597212583",
+      "context": {
+        "score": "<? $score + 1 ?>"
+      },
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "node_6_1583602590593"
+      },
+      "conditions": "@yes_no:yes",
+      "dialog_node": "node_2_1583597212586"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "text": {
+          "values": [
+            "It doesn't look like you may have the corona virus!! Congratulations!!"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_6_1583602590593",
+      "conditions": "$score == 1",
+      "dialog_node": "response_5_1583602942070",
+      "previous_sibling": "response_5_1583602822732"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "text": {
+          "values": [
+            "I would consult your doctor as you show a few symptoms but if you do have it, it might still be caught in time!"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_6_1583602590593",
+      "conditions": "$score == 3",
+      "dialog_node": "response_8_1583602766125",
+      "previous_sibling": "response_7_1583602734921"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "text": {
+          "values": [
+            "You show very clear symptoms. I would consult your doctor, but do so from an isolated area!!"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_6_1583602590593",
+      "conditions": "$score == 4",
+      "dialog_node": "response_7_1583602734921",
+      "previous_sibling": "response_5_1583602610516"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "text": {
+          "values": [
+            "You show only a few symptoms. If you're still concerned call your doctor. In case, make sure that you are in an isolated area or at home- so that other people don't potentially get the corona virus! :) Thanks"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_6_1583602590593",
+      "conditions": "$score == 2",
+      "dialog_node": "response_5_1583602822732",
+      "previous_sibling": "response_8_1583602766125"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "I'm sorry, you show very clear symptoms!! Consult your doctor but make sure you are in an isolated area!! I wish you the best! "
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_6_1583602590593",
+      "conditions": "$score == 5",
+      "dialog_node": "response_5_1583602610516"
+    },
+    {
+      "type": "standard",
+      "title": "no",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": ""
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_4_1583596726450",
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "node_10_1583600540315"
+      },
+      "conditions": "@yes_no:no",
+      "dialog_node": "node_4_1583597066093",
+      "previous_sibling": "node_4_1583596974370"
+    },
+    {
+      "type": "standard",
+      "title": "yes",
+      "output": {
+        "generic": []
+      },
+      "parent": "node_4_1583596726450",
+      "context": {
+        "score": "<? $score + 1 ?>"
+      },
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "node_10_1583600540315"
+      },
+      "conditions": "@yes_no:yes",
+      "dialog_node": "node_4_1583596974370"
+    },
+    {
+      "type": "standard",
+      "title": "q1 - copy3",
+      "output": {
+        "generic": [
+          {
+            "title": "Do you have a fever?",
+            "options": [
+              {
+                "label": "Yes",
+                "value": {
+                  "input": {
+                    "text": "yes"
+                  }
+                }
+              },
+              {
+                "label": "No",
+                "value": {
+                  "input": {
+                    "text": "no"
+                  }
+                }
+              }
+            ],
+            "response_type": "option"
+          }
+        ]
+      },
+      "parent": "node_4_1583596702334",
+      "dialog_node": "node_7_1583600491607",
+      "previous_sibling": "node_10_1583600540315"
+    },
+    {
+      "type": "standard",
+      "parent": "node_4_1583596702334",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "dialog_node": "node_6_1583602590593",
+      "previous_sibling": "node_1_1583597212583"
+    },
+    {
+      "type": "standard",
+      "parent": "node_4_1583596702334",
+      "dialog_node": "node_6_1583603218440",
+      "previous_sibling": "node_6_1583602590593"
+    },
+    {
+      "type": "standard",
+      "title": "q1 - copy4",
+      "output": {
+        "generic": [
+          {
+            "title": "Do you have shortness of breath?",
+            "options": [
+              {
+                "label": "Yes",
+                "value": {
+                  "input": {
+                    "text": "yes"
+                  }
+                }
+              },
+              {
+                "label": "No",
+                "value": {
+                  "input": {
+                    "text": "no"
+                  }
+                }
+              }
+            ],
+            "response_type": "option"
+          }
+        ]
+      },
+      "parent": "node_4_1583596702334",
+      "dialog_node": "node_10_1583600540315",
+      "previous_sibling": "node_4_1583596726450"
+    },
+    {
+      "type": "standard",
+      "title": "q1 - copy1",
+      "output": {
+        "generic": [
+          {
+            "title": "Do you have pneumonia?",
+            "options": [
+              {
+                "label": "Yes",
+                "value": {
+                  "input": {
+                    "text": "yes"
+                  }
+                }
+              },
+              {
+                "label": "No",
+                "value": {
+                  "input": {
+                    "text": "no"
+                  }
+                }
+              }
+            ],
+            "response_type": "option"
+          }
+        ]
+      },
+      "parent": "node_4_1583596702334",
+      "dialog_node": "node_1_1583597212583",
+      "previous_sibling": "node_4_1583600415837"
+    },
+    {
+      "type": "standard",
+      "title": "q1 - copy2",
+      "output": {
+        "generic": [
+          {
+            "title": "Do you have a high temperature?",
+            "options": [
+              {
+                "label": "Yes",
+                "value": {
+                  "input": {
+                    "text": "yes"
+                  }
+                }
+              },
+              {
+                "label": "No",
+                "value": {
+                  "input": {
+                    "text": "no"
+                  }
+                }
+              }
+            ],
+            "response_type": "option"
+          }
+        ]
+      },
+      "parent": "node_4_1583596702334",
+      "dialog_node": "node_4_1583600415837",
+      "previous_sibling": "node_7_1583600491607"
+    },
+    {
+      "type": "standard",
+      "title": "q1",
+      "output": {
+        "generic": [
+          {
+            "title": "Do you have a dry cough?",
+            "options": [
+              {
+                "label": "Yes",
+                "value": {
+                  "input": {
+                    "text": "yes"
+                  }
+                }
+              },
+              {
+                "label": "No",
+                "value": {
+                  "input": {
+                    "text": "no"
+                  }
+                }
+              }
+            ],
+            "response_type": "option"
+          }
+        ]
+      },
+      "parent": "node_4_1583596702334",
+      "dialog_node": "node_4_1583596726450"
+    },
+    {
+      "type": "standard",
+      "title": "Question 1",
+      "output": {
+        "generic": [
+          {
+            "values": [],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          },
+          {
+            "values": [],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_2_1583594935232",
+      "dialog_node": "node_8_1583596656063"
+    },
+    {
+      "type": "standard",
+      "title": "no",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": ""
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_4_1583600415837",
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "node_1_1583597212583"
+      },
+      "conditions": "@yes_no:no",
+      "dialog_node": "node_6_1583600415851",
+      "previous_sibling": "node_5_1583600415851"
+    },
+    {
+      "type": "standard",
+      "title": "yes",
+      "output": {
+        "generic": []
+      },
+      "parent": "node_4_1583600415837",
+      "context": {
+        "score": "<? $score + 1 ?>"
+      },
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "node_1_1583597212583"
+      },
+      "conditions": "@yes_no:yes",
+      "dialog_node": "node_5_1583600415851"
+    },
+    {
+      "type": "standard",
+      "title": "no",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": ""
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_7_1583600491607",
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "node_4_1583600415837"
+      },
+      "conditions": "@yes_no:no",
+      "dialog_node": "node_9_1583600491610",
+      "previous_sibling": "node_8_1583600491610"
+    },
+    {
+      "type": "standard",
+      "title": "yes",
+      "output": {
+        "generic": []
+      },
+      "parent": "node_7_1583600491607",
+      "context": {
+        "score": "<? $score + 1 ?>"
+      },
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "node_4_1583600415837"
+      },
+      "conditions": "@yes_no:yes",
+      "dialog_node": "node_8_1583600491610"
+    },
+    {
+      "type": "standard",
+      "title": "DoIhavethecoronavirus",
+      "output": {
+        "generic": [
+          {
+            "values": [],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          },
+          {
+            "title": "Do you have a high temperature?",
+            "options": [
+              {
+                "label": "",
+                "value": {
+                  "input": {
+                    "text": ""
+                  }
+                }
+              }
+            ],
+            "response_type": "option"
+          },
+          {
+            "title": "Do you have shortness of breath? ",
+            "options": [],
+            "description": "Feel you can't breathe. Tightness. Squeezing pains. ",
+            "response_type": "option"
+          },
+          {
+            "title": "Do you have a fever?",
+            "options": [],
+            "description": "High temperatures, feeling ill, feeling sick, very hot",
+            "response_type": "option"
+          },
+          {
+            "title": "Do you have pneumonia?",
+            "options": [],
+            "description": "Symptoms of pneumonia ",
+            "response_type": "option"
+          }
+        ]
+      },
+      "conditions": "#Doihave",
+      "dialog_node": "node_2_1583594935232",
+      "previous_sibling": "node_4_1583596702334"
+    },
+    {
+      "type": "standard",
+      "title": "Anything else",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "I didn't understand. Can you try rephrasing?"
+              },
+              {
+                "text": "Can you reword your statement? I'm not understanding."
+              },
+              {
+                "text": "I didn't get your meaning."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "Anything else",
+      "previous_sibling": "node_2_1583594935232",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Oh no! Poor you :("
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "context": {
+        "score": 0
+      },
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "node_4_1583596726450"
+      },
+      "conditions": "#Doihave",
+      "dialog_node": "node_4_1583596702334",
+      "previous_sibling": "Welcome"
+    },
+    {
+      "type": "standard",
+      "title": "Welcome",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hello. How can I help you?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "welcome",
+      "dialog_node": "Welcome"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "off_topic": {
+      "enabled": true
+    },
+    "disambiguation": {
+      "prompt": "Did you mean:",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "None of the above"
+    },
+    "human_agent_assist": {
+      "prompt": "Did you mean:"
+    },
+    "spelling_auto_correct": true
+  },
+  "learning_opt_out": false,
+  "name": "My first skill",
+  "language": "en",
+  "description": ""
+}
